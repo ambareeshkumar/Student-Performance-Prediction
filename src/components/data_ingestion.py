@@ -6,6 +6,10 @@ from dataclasses import dataclass
 from src.logger import logging
 from src.exception import CustomException
 
+
+from src.components.data_transformation import DataTransformer
+from src.components.data_transformation import DataTransformerConfig
+
 @dataclass
 class DataIngestionConfig:
     raw_save_path: str = os.path.join('artifacts',"raw_data.csv")
@@ -43,6 +47,11 @@ class DataIngestion:
             raise CustomException(e,sys)
 
 if __name__ == "__main__":
+
     logging.info("Running Data Ingestion")
     Ingestion = DataIngestion(DataIngestionConfig)
-    Ingestion.initiate_data_ingestion()
+    train_data, test_data = Ingestion.initiate_data_ingestion()
+
+    logging.info(f"Running Data Transformation")
+    Transformation = DataTransformer(DataTransformerConfig)
+    Transformation.initiate_data_transform(train_data, test_data)
