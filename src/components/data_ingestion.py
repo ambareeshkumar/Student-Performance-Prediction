@@ -9,6 +9,8 @@ from src.exception import CustomException
 
 from src.components.data_transformation import DataTransformer
 from src.components.data_transformation import DataTransformerConfig
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
 
 @dataclass
 class DataIngestionConfig:
@@ -54,4 +56,8 @@ if __name__ == "__main__":
 
     logging.info(f"Running Data Transformation")
     Transformation = DataTransformer(DataTransformerConfig)
-    Transformation.initiate_data_transform(train_data, test_data)
+    train_arr, test_arr, _ = Transformation.initiate_data_transform(train_data, test_data)
+
+    logging.info(f"Running Model Training")
+    ModelTrainer = ModelTrainer(ModelTrainerConfig)
+    ModelTrainer.initiate_model_trainer(train_arr, test_arr)
