@@ -41,16 +41,36 @@ class ModelTrainer:
                 'AdaBoostRegressor': AdaBoostRegressor(),
                 'GradientBoostingRegressor': GradientBoostingRegressor(),
                 'XGBRegressor': XGBRegressor(),
-                'catBoostRegressor': CatBoostRegressor()
+                'CatBoostRegressor': CatBoostRegressor()
             }
 
-            model_report: dict = evaluate_models(X_train, y_train, X_test, y_test, test_models=models)
+            param_grid = {
+                'LinearRegression': {'fit_intercept': [True, False]},
+                'DecisionTreeRegressor': {'max_depth': [None, 5, 10, 20]},
+                'RandomForestRegressor': {'n_estimators': [50, 100, 200], 'max_depth': [None, 5, 10]},
+                'AdaBoostRegressor': {'n_estimators': [50, 100, 200], 'learning_rate': [0.01, 0.1, 1.0]},
+                'GradientBoostingRegressor': {'n_estimators': [50, 100, 200], 'learning_rate': [0.01, 0.1, 1.0],
+                                              'max_depth': [3, 5, 10]},
+                'XGBRegressor': {'n_estimators': [50, 100, 200], 'learning_rate': [0.01, 0.1, 1.0],
+                                 'max_depth': [3, 5, 10]},
+                'CatBoostRegressor': {'iterations': [50, 100, 200], 'learning_rate': [0.01, 0.1, 1.0]}
+            }
+
+            model_report: dict = evaluate_models(X_train, y_train, X_test, y_test, test_models=models, params = param_grid)
             logging.info(f"Model Report: {model_report}")
 
-            best_model_score = max(sorted(model_report.values()))
+            model_test_report = {}
+
+            for key, val in model_report.items():
+                if key.split('_')[1] == 'TestScore':
+                    model_test_report[key] = val
+
+            print(f"Model Test Report: {model_test_report}")
+            best_model_score = max(model_test_report.values())
             logging.info(f"Best Model Score: {best_model_score}")
 
-            best_model_name = max(model_report,  key=lambda x: model_report[x])
+            model_test_report = max(model_report,  key=lambda x: model_report[x])
+            best_model_name = model_test_report.split('_')[0]
             logging.info(f"Best Model {best_model_name} Score: {best_model_score}")
 
             best_model = models[best_model_name]
@@ -68,6 +88,6 @@ class ModelTrainer:
             return best_model_score
 
     except Exception as e:
-        logging.info(f"Error occurred in the file {__file__} on line number {sys._getframe().f_lineno} error message {str(e)}")
+        logging.error(f"Error occurred in the file {__file__} on line number {sys._getframe().f_lineno} error message {str(e)}")
         raise CustomException(e,sys)
 

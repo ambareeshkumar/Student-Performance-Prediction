@@ -63,7 +63,7 @@ class DataTransformer:
             return preprocessor
 
         except Exception as e:
-            logging.info(f"Error occurred in the file {__file__} on line number {sys._getframe().f_lineno} error message {str(e)}")
+            logging.error(f"Error occurred in the file {__file__} on line number {sys._getframe().f_lineno} error message {str(e)}")
             raise CustomException(e,sys)
 
     def initiate_data_transform(self,train_path,test_path):
@@ -105,5 +105,5 @@ class DataTransformer:
             )
 
         except Exception as e:
-            logging.info(f"Error occurred in the file {__file__} on line number {sys._getframe().f_lineno} error message {str(e)}")
+            logging.error(f"Error occurred in the file {__file__} on line number {sys._getframe().f_lineno} error message {str(e)}")
             raise CustomException(e,sys)

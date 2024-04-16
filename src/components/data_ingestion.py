@@ -45,7 +45,7 @@ class DataIngestion:
                     self.config.test_save_path,
             )
         except Exception as e:
-            logging.info("Data Ingestion Failed")
+            logging.error("Data Ingestion Failed")
             raise CustomException(e,sys)
 
 if __name__ == "__main__":
