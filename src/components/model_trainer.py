@@ -18,7 +18,7 @@ from src.utils import save_object,evaluate_models
 
 @dataclass
 class ModelTrainerConfig:
-    modelTrainer_path = os.path.join('artifacts','model.py')
+    modelTrainer_path = os.path.join('artifacts','model.pkl')
 
 class ModelTrainer:
 
