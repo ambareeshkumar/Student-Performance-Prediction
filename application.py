@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 from src.pipeline.predict_pipeline import CustomData, PredictPipeline
 from src.logger import logging
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 @app.route('/')
 def index():
@@ -36,5 +36,5 @@ def predict_datapoint():
         return render_template('home.html',result = result[0])
 
 if __name__ == '__main__':
-    app.run(host = "0.0.0.0",debug=True)
+    application.run(host = "0.0.0.0",debug=True)
 
