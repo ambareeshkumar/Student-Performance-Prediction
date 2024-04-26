@@ -8,11 +8,11 @@ from src.logger import logging
 
 application = Flask(__name__)
 
-@app.route('/')
+@application.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/predict', methods=['GET', 'POST'])
+@application.route('/predict', methods=['GET', 'POST'])
 def predict_datapoint():
     if request.method == 'GET':
         return render_template('home.html')
@@ -36,5 +36,5 @@ def predict_datapoint():
         return render_template('home.html',result = result[0])
 
 if __name__ == '__main__':
-    application.run(host = "0.0.0.0",debug=True)
+    application.run(host = "0.0.0.0")
 
