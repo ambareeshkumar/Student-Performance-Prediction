@@ -19,7 +19,7 @@ class PredictPipeline:
             logging.info("Loading Model in predict pipleine completed")
 
             logging.info("Transforming features in predict pipleine")
-            logging.info("features", features)
+            # logging.info("features", features)
             data_scaled = preprocessor.transform(features)
             logging.info("Transforming features in predict pipleine completed")
 

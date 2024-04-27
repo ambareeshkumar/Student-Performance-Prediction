@@ -33,7 +33,8 @@ def predict_datapoint():
         predict_pipeline = PredictPipeline()
         result = predict_pipeline.predict(pred_df)
         logging.info(f"predicted the final result{result}")
-        return render_template('home.html',result = result[0])
+        result_formatted = "{:.1f}".format(result[0])
+        return render_template('home.html',result = result_formatted)
 
 if __name__ == '__main__':
     application.run(host = "0.0.0.0")
