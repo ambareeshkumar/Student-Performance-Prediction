@@ -10,7 +10,6 @@ RandomForestRegressor
 )
 from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
-from xgboost import XGBRegressor
 
 from src.exception import CustomException
 from src.logger import logging
@@ -40,7 +39,6 @@ class ModelTrainer:
                 'RandomForestRegressor': RandomForestRegressor(),
                 'AdaBoostRegressor': AdaBoostRegressor(),
                 'GradientBoostingRegressor': GradientBoostingRegressor(),
-                'XGBRegressor': XGBRegressor(),
                 'CatBoostRegressor': CatBoostRegressor()
             }
 
@@ -51,8 +49,6 @@ class ModelTrainer:
                 'AdaBoostRegressor': {'n_estimators': [50, 100, 200], 'learning_rate': [0.01, 0.1, 1.0]},
                 'GradientBoostingRegressor': {'n_estimators': [50, 100, 200], 'learning_rate': [0.01, 0.1, 1.0],
                                               'max_depth': [3, 5, 10]},
-                'XGBRegressor': {'n_estimators': [50, 100, 200], 'learning_rate': [0.01, 0.1, 1.0],
-                                 'max_depth': [3, 5, 10]},
                 'CatBoostRegressor': {'iterations': [50, 100, 200], 'learning_rate': [0.01, 0.1, 1.0]}
             }
 
