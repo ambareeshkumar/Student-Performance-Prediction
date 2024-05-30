@@ -1,6 +1,6 @@
 ## Student Performance Prediction
 
-This project aims to predict student performance based on various factors. It utilizes machine learning techniques to analyze and predict student outcomes. This is an end-to-end project deployed on AWS using Elastic Beanstalk. Various machine learning models are used to achieve the best accuracy and predict the output.
+This project aims to predict student performance based on various factors. It utilizes machine learning techniques to analyze and predict student outcomes. This is an end-to-end project deployed on AWS using Elastic Beanstalk and AWS CodePipeline for continuous integration and deployment. Various machine learning models are used to achieve the best accuracy and predict the output.
 
 ### Features
 
